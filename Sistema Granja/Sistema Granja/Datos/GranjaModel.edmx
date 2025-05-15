@@ -1,0 +1,436 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BDGRANJAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ClasesHatosReprod">
+          <Key>
+            <PropertyRef Name="IdClase" />
+          </Key>
+          <Property Name="IdClase" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Descripcion" Type="char" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Configuraciones_Globales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="Valor" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Destetes_Completos_o_Parciales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lote_Engorde" Type="char" MaxLength="8" />
+          <Property Name="Lote_Gestacion" Type="char" MaxLength="8" />
+          <Property Name="Documento" Type="char" MaxLength="10" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="No_Cerditos" Type="int" />
+          <Property Name="No_Cerdas" Type="int" />
+          <Property Name="Tota_Peso" Type="decimal" Precision="14" Scale="2" />
+        </EntityType>
+        <EntityType Name="Fecha_Dias_Desarrollo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lote_No" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Dias" Type="int" Nullable="false" />
+          <Property Name="Fecha_Semanal" Type="date" />
+        </EntityType>
+        <EntityType Name="MotivosDefuncionAntesDestete">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Motivo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Movimientos_Lotes_Int">
+          <Key>
+            <PropertyRef Name="ID_Movimiento" />
+          </Key>
+          <Property Name="ID_Movimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="De_Lote" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="A_Lote" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="Fecha_Movimiento" Type="date" Nullable="false" />
+          <Property Name="Motivo" Type="char" MaxLength="150" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Usuario_Creador" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="Costo" Type="float" Nullable="false" />
+          <Property Name="Documento_NO" Type="char" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Registo_Celo">
+          <Key>
+            <PropertyRef Name="ID_Celo" />
+            <PropertyRef Name="Codigo_Cerda" />
+          </Key>
+          <Property Name="ID_Celo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo_Cerda" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="Tipo_Cerda" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="Evento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fecha_Hora_Creacion" Type="datetime" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Hora" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Peso" Type="decimal" Precision="14" Scale="2" Nullable="false" />
+          <Property Name="Orden" Type="int" Nullable="false" />
+          <Property Name="Observaciones" Type="varchar" MaxLength="300" />
+          <Property Name="Etapa" Type="nvarchar" MaxLength="20" />
+          <Property Name="EdadDias" Type="int" />
+          <Property Name="IdClase" Type="char" MaxLength="2" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BDGRANJA.dbo.v_consulta_reemplazos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="v_consulta_reemplazos">
+          <Key>
+            <PropertyRef Name="IdCerda" />
+            <PropertyRef Name="Fecha_Nacimiento" />
+            <PropertyRef Name="L_Genetica" />
+            <PropertyRef Name="Padre" />
+            <PropertyRef Name="Madre" />
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="id" Type="bigint" />
+          <Property Name="IdCerda" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="Fecha_Nacimiento" Type="datetime" Nullable="false" />
+          <Property Name="L_Genetica" Type="char" MaxLength="12" Nullable="false" />
+          <Property Name="Padre" Type="char" MaxLength="12" Nullable="false" />
+          <Property Name="Madre" Type="char" MaxLength="12" Nullable="false" />
+          <Property Name="etapa" Type="char" MaxLength="20" />
+          <Property Name="Tipo" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="edaddias" Type="int" />
+          <Property Name="IdClase" Type="char" MaxLength="2" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BDGRANJA.dbo.vReporteSalidasFarmacosXEtapa' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vReporteSalidasFarmacosXEtapa">
+          <Key>
+            <PropertyRef Name="SalidaNo" />
+            <PropertyRef Name="Bodega" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="SalidaNo" Type="bigint" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Codigo" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Cantidad" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="Etapa" Type="char" MaxLength="30" />
+          <Property Name="Bodega" Type="varchar" MaxLength="38" Nullable="false" />
+          <Property Name="idBodega" Type="char" MaxLength="4" />
+        </EntityType>
+        <EntityContainer Name="BDGRANJAModelStoreContainer">
+          <EntitySet Name="ClasesHatosReprod" EntityType="Self.ClasesHatosReprod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Configuraciones_Globales" EntityType="Self.Configuraciones_Globales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Destetes_Completos_o_Parciales" EntityType="Self.Destetes_Completos_o_Parciales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fecha_Dias_Desarrollo" EntityType="Self.Fecha_Dias_Desarrollo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MotivosDefuncionAntesDestete" EntityType="Self.MotivosDefuncionAntesDestete" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movimientos_Lotes_Int" EntityType="Self.Movimientos_Lotes_Int" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registo_Celo" EntityType="Self.Registo_Celo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="v_consulta_reemplazos" EntityType="Self.v_consulta_reemplazos" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_consulta_reemplazos].[id] AS [id], 
+    [v_consulta_reemplazos].[IdCerda] AS [IdCerda], 
+    [v_consulta_reemplazos].[Fecha_Nacimiento] AS [Fecha_Nacimiento], 
+    [v_consulta_reemplazos].[L_Genetica] AS [L_Genetica], 
+    [v_consulta_reemplazos].[Padre] AS [Padre], 
+    [v_consulta_reemplazos].[Madre] AS [Madre], 
+    [v_consulta_reemplazos].[etapa] AS [etapa], 
+    [v_consulta_reemplazos].[Tipo] AS [Tipo], 
+    [v_consulta_reemplazos].[edaddias] AS [edaddias], 
+    [v_consulta_reemplazos].[IdClase] AS [IdClase]
+    FROM [dbo].[v_consulta_reemplazos] AS [v_consulta_reemplazos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vReporteSalidasFarmacosXEtapa" EntityType="Self.vReporteSalidasFarmacosXEtapa" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vReporteSalidasFarmacosXEtapa].[SalidaNo] AS [SalidaNo], 
+    [vReporteSalidasFarmacosXEtapa].[Fecha] AS [Fecha], 
+    [vReporteSalidasFarmacosXEtapa].[Codigo] AS [Codigo], 
+    [vReporteSalidasFarmacosXEtapa].[Descripcion] AS [Descripcion], 
+    [vReporteSalidasFarmacosXEtapa].[Cantidad] AS [Cantidad], 
+    [vReporteSalidasFarmacosXEtapa].[Etapa] AS [Etapa], 
+    [vReporteSalidasFarmacosXEtapa].[Bodega] AS [Bodega], 
+    [vReporteSalidasFarmacosXEtapa].[idBodega] AS [idBodega]
+    FROM [dbo].[vReporteSalidasFarmacosXEtapa] AS [vReporteSalidasFarmacosXEtapa]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BDGRANJAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="GRANJAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="v_consulta_reemplazos" EntityType="BDGRANJAModel.v_consulta_reemplazos" />
+          <EntitySet Name="Registo_Celo" EntityType="BDGRANJAModel.Registo_Celo" />
+          <EntitySet Name="ClasesHatosReprod" EntityType="BDGRANJAModel.ClasesHatosReprod" />
+          <EntitySet Name="Configuraciones_Globales" EntityType="BDGRANJAModel.Configuraciones_Globales" />
+          <EntitySet Name="Movimientos_Lotes_Int" EntityType="BDGRANJAModel.Movimientos_Lotes_Int" />
+          <EntitySet Name="Destetes_Completos_o_Parciales" EntityType="BDGRANJAModel.Destetes_Completos_o_Parciales" />
+          <EntitySet Name="Fecha_Dias_Desarrollo" EntityType="BDGRANJAModel.Fecha_Dias_Desarrollo" />
+          <EntitySet Name="MotivosDefuncionAntesDestete" EntityType="BDGRANJAModel.MotivosDefuncionAntesDestete" />
+          <EntitySet Name="vReporteSalidasFarmacosXEtapa" EntityType="BDGRANJAModel.vReporteSalidasFarmacosXEtapa" />
+        </EntityContainer>
+        <EntityType Name="v_consulta_reemplazos">
+          <Key>
+            <PropertyRef Name="IdCerda" />
+            <PropertyRef Name="Fecha_Nacimiento" />
+            <PropertyRef Name="L_Genetica" />
+            <PropertyRef Name="Padre" />
+            <PropertyRef Name="Madre" />
+            <PropertyRef Name="Tipo" />
+          </Key>
+          <Property Name="id" Type="Int64" />
+          <Property Name="IdCerda" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" Type="String" />
+          <Property Name="Fecha_Nacimiento" Nullable="false" Precision="3" Type="DateTime" />
+          <Property Name="L_Genetica" Nullable="false" MaxLength="12" FixedLength="true" Unicode="false" Type="String" />
+          <Property Name="Padre" Nullable="false" MaxLength="12" FixedLength="true" Unicode="false" Type="String" />
+          <Property Name="Madre" Nullable="false" MaxLength="12" FixedLength="true" Unicode="false" Type="String" />
+          <Property Name="etapa" MaxLength="20" FixedLength="true" Unicode="false" Type="String" />
+          <Property Name="Tipo" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="edaddias" Type="Int32" />
+          <Property Name="IdClase" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Registo_Celo">
+          <Key>
+            <PropertyRef Name="ID_Celo" />
+            <PropertyRef Name="Codigo_Cerda" />
+          </Key>
+          <Property Name="ID_Celo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo_Cerda" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Tipo_Cerda" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Evento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Hora_Creacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Hora" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Peso" Type="Decimal" Nullable="false" Precision="14" Scale="2" />
+          <Property Name="Orden" Type="Int32" Nullable="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Etapa" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EdadDias" Type="Int32" />
+          <Property Name="IdClase" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ClasesHatosReprod">
+          <Key>
+            <PropertyRef Name="IdClase" />
+          </Key>
+          <Property Name="IdClase" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Configuraciones_Globales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Valor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Movimientos_Lotes_Int">
+          <Key>
+            <PropertyRef Name="ID_Movimiento" />
+          </Key>
+          <Property Name="ID_Movimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="De_Lote" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="A_Lote" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="Fecha_Movimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Motivo" Type="String" Nullable="false" MaxLength="150" FixedLength="true" Unicode="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Usuario_Creador" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Costo" Type="Double" Nullable="false" />
+          <Property Name="Documento_NO" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Destetes_Completos_o_Parciales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lote_Engorde" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="Lote_Gestacion" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="Documento" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="No_Cerditos" Type="Int32" />
+          <Property Name="No_Cerdas" Type="Int32" />
+          <Property Name="Tota_Peso" Type="Decimal" Precision="14" Scale="2" />
+        </EntityType>
+        <EntityType Name="Fecha_Dias_Desarrollo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lote_No" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Dias" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_Semanal" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="MotivosDefuncionAntesDestete">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Motivo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vReporteSalidasFarmacosXEtapa">
+          <Key>
+            <PropertyRef Name="SalidaNo" />
+            <PropertyRef Name="Bodega" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="SalidaNo" Type="Int64" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="Codigo" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="Etapa" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Bodega" Type="String" Nullable="false" MaxLength="38" FixedLength="false" Unicode="false" />
+          <Property Name="idBodega" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BDGRANJAModelStoreContainer" CdmEntityContainer="GRANJAEntities">
+          <EntitySetMapping Name="v_consulta_reemplazos">
+            <EntityTypeMapping TypeName="BDGRANJAModel.v_consulta_reemplazos">
+              <MappingFragment StoreEntitySet="v_consulta_reemplazos">
+                <ScalarProperty Name="IdClase" ColumnName="IdClase" />
+                <ScalarProperty Name="edaddias" ColumnName="edaddias" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="etapa" ColumnName="etapa" />
+                <ScalarProperty Name="Madre" ColumnName="Madre" />
+                <ScalarProperty Name="Padre" ColumnName="Padre" />
+                <ScalarProperty Name="L_Genetica" ColumnName="L_Genetica" />
+                <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
+                <ScalarProperty Name="IdCerda" ColumnName="IdCerda" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registo_Celo">
+            <EntityTypeMapping TypeName="BDGRANJAModel.Registo_Celo">
+              <MappingFragment StoreEntitySet="Registo_Celo">
+                <ScalarProperty Name="IdClase" ColumnName="IdClase" />
+                <ScalarProperty Name="EdadDias" ColumnName="EdadDias" />
+                <ScalarProperty Name="Etapa" ColumnName="Etapa" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Peso" ColumnName="Peso" />
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Fecha_Hora_Creacion" ColumnName="Fecha_Hora_Creacion" />
+                <ScalarProperty Name="Evento" ColumnName="Evento" />
+                <ScalarProperty Name="Tipo_Cerda" ColumnName="Tipo_Cerda" />
+                <ScalarProperty Name="Codigo_Cerda" ColumnName="Codigo_Cerda" />
+                <ScalarProperty Name="ID_Celo" ColumnName="ID_Celo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClasesHatosReprod">
+            <EntityTypeMapping TypeName="BDGRANJAModel.ClasesHatosReprod">
+              <MappingFragment StoreEntitySet="ClasesHatosReprod">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdClase" ColumnName="IdClase" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Configuraciones_Globales">
+            <EntityTypeMapping TypeName="BDGRANJAModel.Configuraciones_Globales">
+              <MappingFragment StoreEntitySet="Configuraciones_Globales">
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movimientos_Lotes_Int">
+            <EntityTypeMapping TypeName="BDGRANJAModel.Movimientos_Lotes_Int">
+              <MappingFragment StoreEntitySet="Movimientos_Lotes_Int">
+                <ScalarProperty Name="Documento_NO" ColumnName="Documento_NO" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Usuario_Creador" ColumnName="Usuario_Creador" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Motivo" ColumnName="Motivo" />
+                <ScalarProperty Name="Fecha_Movimiento" ColumnName="Fecha_Movimiento" />
+                <ScalarProperty Name="A_Lote" ColumnName="A_Lote" />
+                <ScalarProperty Name="De_Lote" ColumnName="De_Lote" />
+                <ScalarProperty Name="ID_Movimiento" ColumnName="ID_Movimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Destetes_Completos_o_Parciales">
+            <EntityTypeMapping TypeName="BDGRANJAModel.Destetes_Completos_o_Parciales">
+              <MappingFragment StoreEntitySet="Destetes_Completos_o_Parciales">
+                <ScalarProperty Name="Tota_Peso" ColumnName="Tota_Peso" />
+                <ScalarProperty Name="No_Cerdas" ColumnName="No_Cerdas" />
+                <ScalarProperty Name="No_Cerditos" ColumnName="No_Cerditos" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Lote_Gestacion" ColumnName="Lote_Gestacion" />
+                <ScalarProperty Name="Lote_Engorde" ColumnName="Lote_Engorde" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fecha_Dias_Desarrollo">
+            <EntityTypeMapping TypeName="BDGRANJAModel.Fecha_Dias_Desarrollo">
+              <MappingFragment StoreEntitySet="Fecha_Dias_Desarrollo">
+                <ScalarProperty Name="Fecha_Semanal" ColumnName="Fecha_Semanal" />
+                <ScalarProperty Name="Dias" ColumnName="Dias" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Lote_No" ColumnName="Lote_No" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MotivosDefuncionAntesDestete">
+            <EntityTypeMapping TypeName="BDGRANJAModel.MotivosDefuncionAntesDestete">
+              <MappingFragment StoreEntitySet="MotivosDefuncionAntesDestete">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Motivo" ColumnName="Motivo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vReporteSalidasFarmacosXEtapa">
+            <EntityTypeMapping TypeName="BDGRANJAModel.vReporteSalidasFarmacosXEtapa">
+              <MappingFragment StoreEntitySet="vReporteSalidasFarmacosXEtapa">
+                <ScalarProperty Name="idBodega" ColumnName="idBodega" />
+                <ScalarProperty Name="Bodega" ColumnName="Bodega" />
+                <ScalarProperty Name="Etapa" ColumnName="Etapa" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="SalidaNo" ColumnName="SalidaNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

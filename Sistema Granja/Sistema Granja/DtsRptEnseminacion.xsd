@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DtsRptEnseminacion" targetNamespace="http://tempuri.org/DtsRptEnseminacion.xsd" xmlns:mstns="http://tempuri.org/DtsRptEnseminacion.xsd" xmlns="http://tempuri.org/DtsRptEnseminacion.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+        </Connections>
+        <Tables>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DtsRptEnseminacion" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DtsRptEnseminacion" msprop:Generator_DataSetName="DtsRptEnseminacion">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Enseminacion_x_Cerda" msprop:Generator_UserTableName="Enseminacion_x_Cerda" msprop:Generator_RowDeletedName="Enseminacion_x_CerdaRowDeleted" msprop:Generator_TableClassName="Enseminacion_x_CerdaDataTable" msprop:Generator_RowChangedName="Enseminacion_x_CerdaRowChanged" msprop:Generator_RowClassName="Enseminacion_x_CerdaRow" msprop:Generator_RowChangingName="Enseminacion_x_CerdaRowChanging" msprop:Generator_RowEvArgName="Enseminacion_x_CerdaRowChangeEvent" msprop:Generator_RowEvHandlerName="Enseminacion_x_CerdaRowChangeEventHandler" msprop:Generator_TablePropName="Enseminacion_x_Cerda" msprop:Generator_TableVarName="tableEnseminacion_x_Cerda" msprop:Generator_RowDeletingName="Enseminacion_x_CerdaRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Código_Cerda" msprop:Generator_UserColumnName="Código_Cerda" msprop:Generator_ColumnPropNameInRow="Código_Cerda" msprop:Generator_ColumnVarNameInTable="columnCódigo_Cerda" msprop:Generator_ColumnPropNameInTable="Código_CerdaColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Fecha_Enseminacion" msprop:Generator_UserColumnName="Fecha_Enseminacion" msprop:Generator_ColumnPropNameInRow="Fecha_Enseminacion" msprop:Generator_ColumnVarNameInTable="columnFecha_Enseminacion" msprop:Generator_ColumnPropNameInTable="Fecha_EnseminacionColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Estado" msprop:Generator_UserColumnName="Estado" msprop:Generator_ColumnPropNameInRow="Estado" msprop:Generator_ColumnVarNameInTable="columnEstado" msprop:Generator_ColumnPropNameInTable="EstadoColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Fecha_Parto_Estimada" msprop:Generator_UserColumnName="Fecha_Parto_Estimada" msprop:Generator_ColumnPropNameInRow="Fecha_Parto_Estimada" msprop:Generator_ColumnVarNameInTable="columnFecha_Parto_Estimada" msprop:Generator_ColumnPropNameInTable="Fecha_Parto_EstimadaColumn" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,3 @@
+Public Class frmBusqueda_x_codigo_madre
+
+End Class

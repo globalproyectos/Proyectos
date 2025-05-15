@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dtsTableroInformativo" targetNamespace="http://tempuri.org/dtsTableroInformativo.xsd" xmlns:mstns="http://tempuri.org/dtsTableroInformativo.xsd" xmlns="http://tempuri.org/dtsTableroInformativo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="MySettings" AppSettingsPropertyName="BDGRANJAConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="BDGRANJAConnectionString (MySettings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Sistema_Granja.My.MySettings.GlobalReference.Default.BDGRANJAConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Etapas_CerdasTableAdapter" GeneratorDataComponentClassName="Etapas_CerdasTableAdapter" Name="Etapas_Cerdas" UserDataComponentName="Etapas_CerdasTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="BDGRANJAConnectionString (MySettings)" DbObjectName="BDGRANJA.dbo.Etapas_Cerdas" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>select  e.Descripcion Etapa,count(*) Num
+from Reg_Madres rm left join Etapas_Cerdas e on e.Codigo   = rm.Estado_Actual
+where rm.Lote_No &lt;&gt; '0'
+group by e.Descripcion </CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Etapa" DataSetColumn="Etapa" />
+              <Mapping SourceColumn="Num" DataSetColumn="Num" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DestetadosPorMesTableAdapter" GeneratorDataComponentClassName="DestetadosPorMesTableAdapter" Name="DestetadosPorMes" UserDataComponentName="DestetadosPorMesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="BDGRANJAConnectionString (MySettings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>select DATEPART(YEAR, m.Fecha_Movimiento) Año, rtrim(convert(char,DATEPART (MONTH, m.Fecha_Movimiento  ))) +'-'+ DATENAME (MONTH, m.Fecha_Movimiento  ) Mes, sum(m.Entrada) TotalDestetados  
+from Movimiento_Lote m inner join Lotes l on l.Lote_No = m.Lote_No 
+where m.Documento_NO like 'Dt.%' and l.IdEtapa_Cerdas ='E'
+and m.Fecha_Movimiento &gt;= '01/' + rtrim(convert(char,DATEPART (MONTH, GETDATE()-160)))+ '/'+ rtrim(convert(char, DATEPART (year, GETDATE()-160)))
+group by DATEPART (YEAR, m.Fecha_Movimiento), rtrim(convert(char,DATEPART (MONTH, m.Fecha_Movimiento  ))) +'-'+ DATENAME (MONTH, m.Fecha_Movimiento  )
+order by Año, Mes </CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Año" DataSetColumn="Año" />
+              <Mapping SourceColumn="Mes" DataSetColumn="Mes" />
+              <Mapping SourceColumn="TotalDestetados" DataSetColumn="TotalDestetados" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Proc_TableroInformativo_Engodes_6_mesesTableAdapter" GeneratorDataComponentClassName="Proc_TableroInformativo_Engodes_6_mesesTableAdapter" Name="Proc_TableroInformativo_Engodes_6_meses" UserDataComponentName="Proc_TableroInformativo_Engodes_6_mesesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="BDGRANJAConnectionString (MySettings)" DbObjectName="BDGRANJA.dbo.Proc_TableroInformativo_Engodes_6_meses" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                    <CommandText>dbo.Proc_TableroInformativo_Engodes_6_meses</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@pFechaHasta" Precision="23" ProviderType="DateTime" Scale="3" Size="8" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="mes" DataSetColumn="mes" />
+              <Mapping SourceColumn="año_orden" DataSetColumn="año_orden" />
+              <Mapping SourceColumn="mes_orden" DataSetColumn="mes_orden" />
+              <Mapping SourceColumn="nacidosvivos" DataSetColumn="nacidosvivos" />
+              <Mapping SourceColumn="nacidosmuertos" DataSetColumn="nacidosmuertos" />
+              <Mapping SourceColumn="monias" DataSetColumn="monias" />
+              <Mapping SourceColumn="muertosgestacion" DataSetColumn="muertosgestacion" />
+              <Mapping SourceColumn="donados" DataSetColumn="donados" />
+              <Mapping SourceColumn="adoptados" DataSetColumn="adoptados" />
+              <Mapping SourceColumn="destetados" DataSetColumn="destetados" />
+              <Mapping SourceColumn="momias" DataSetColumn="momias" />
+              <Mapping SourceColumn="nacidovivos" DataSetColumn="nacidovivos" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="Proc_TableroInformativo_Engodes_3_añosTableAdapter" GeneratorDataComponentClassName="Proc_TableroInformativo_Engodes_3_añosTableAdapter" Name="Proc_TableroInformativo_Engodes_3_años" UserDataComponentName="Proc_TableroInformativo_Engodes_3_añosTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="BDGRANJAConnectionString (MySettings)" DbObjectName="BDGRANJA.dbo.Proc_TableroInformativo_Engodes_3_años" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
+                    <CommandText>dbo.Proc_TableroInformativo_Engodes_3_años</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="int" DbType="Int32" Direction="ReturnValue" ParameterName="@RETURN_VALUE" Precision="10" ProviderType="Int" Scale="0" Size="4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@pFechaHasta" Precision="23" ProviderType="DateTime" Scale="3" Size="8" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="año" DataSetColumn="año" />
+              <Mapping SourceColumn="año_orden" DataSetColumn="año_orden" />
+              <Mapping SourceColumn="nacidosvivos" DataSetColumn="nacidosvivos" />
+              <Mapping SourceColumn="nacidosmuertos" DataSetColumn="nacidosmuertos" />
+              <Mapping SourceColumn="momias" DataSetColumn="momias" />
+              <Mapping SourceColumn="muertosgestacion" DataSetColumn="muertosgestacion" />
+              <Mapping SourceColumn="donados" DataSetColumn="donados" />
+              <Mapping SourceColumn="adoptados" DataSetColumn="adoptados" />
+              <Mapping SourceColumn="destetados" DataSetColumn="destetados" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dtsTableroInformativo" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dtsTableroInformativo" msprop:Generator_UserDSName="dtsTableroInformativo">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Etapas_Cerdas" msprop:Generator_TableClassName="Etapas_CerdasDataTable" msprop:Generator_TableVarName="tableEtapas_Cerdas" msprop:Generator_RowChangedName="Etapas_CerdasRowChanged" msprop:Generator_TablePropName="Etapas_Cerdas" msprop:Generator_RowDeletingName="Etapas_CerdasRowDeleting" msprop:Generator_RowChangingName="Etapas_CerdasRowChanging" msprop:Generator_RowEvHandlerName="Etapas_CerdasRowChangeEventHandler" msprop:Generator_RowDeletedName="Etapas_CerdasRowDeleted" msprop:Generator_RowClassName="Etapas_CerdasRow" msprop:Generator_UserTableName="Etapas_Cerdas" msprop:Generator_RowEvArgName="Etapas_CerdasRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Etapa" msprop:Generator_ColumnVarNameInTable="columnEtapa" msprop:Generator_ColumnPropNameInRow="Etapa" msprop:Generator_ColumnPropNameInTable="EtapaColumn" msprop:Generator_UserColumnName="Etapa" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Num" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNum" msprop:Generator_ColumnPropNameInRow="Num" msprop:Generator_ColumnPropNameInTable="NumColumn" msprop:Generator_UserColumnName="Num" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DestetadosPorMes" msprop:Generator_TableClassName="DestetadosPorMesDataTable" msprop:Generator_TableVarName="tableDestetadosPorMes" msprop:Generator_RowChangedName="DestetadosPorMesRowChanged" msprop:Generator_TablePropName="DestetadosPorMes" msprop:Generator_RowDeletingName="DestetadosPorMesRowDeleting" msprop:Generator_RowChangingName="DestetadosPorMesRowChanging" msprop:Generator_RowEvHandlerName="DestetadosPorMesRowChangeEventHandler" msprop:Generator_RowDeletedName="DestetadosPorMesRowDeleted" msprop:Generator_RowClassName="DestetadosPorMesRow" msprop:Generator_UserTableName="DestetadosPorMes" msprop:Generator_RowEvArgName="DestetadosPorMesRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Año" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnAño" msprop:Generator_ColumnPropNameInRow="Año" msprop:Generator_ColumnPropNameInTable="AñoColumn" msprop:Generator_UserColumnName="Año" type="xs:int" minOccurs="0" />
+              <xs:element name="Mes" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnMes" msprop:Generator_ColumnPropNameInRow="Mes" msprop:Generator_ColumnPropNameInTable="MesColumn" msprop:Generator_UserColumnName="Mes" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="61" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TotalDestetados" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotalDestetados" msprop:Generator_ColumnPropNameInRow="TotalDestetados" msprop:Generator_ColumnPropNameInTable="TotalDestetadosColumn" msprop:Generator_UserColumnName="TotalDestetados" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Proc_TableroInformativo_Engodes_6_meses" msprop:Generator_TableClassName="Proc_TableroInformativo_Engodes_6_mesesDataTable" msprop:Generator_TableVarName="tableProc_TableroInformativo_Engodes_6_meses" msprop:Generator_TablePropName="Proc_TableroInformativo_Engodes_6_meses" msprop:Generator_RowDeletingName="Proc_TableroInformativo_Engodes_6_mesesRowDeleting" msprop:Generator_RowChangingName="Proc_TableroInformativo_Engodes_6_mesesRowChanging" msprop:Generator_RowEvHandlerName="Proc_TableroInformativo_Engodes_6_mesesRowChangeEventHandler" msprop:Generator_RowDeletedName="Proc_TableroInformativo_Engodes_6_mesesRowDeleted" msprop:Generator_UserTableName="Proc_TableroInformativo_Engodes_6_meses" msprop:Generator_RowChangedName="Proc_TableroInformativo_Engodes_6_mesesRowChanged" msprop:Generator_RowEvArgName="Proc_TableroInformativo_Engodes_6_mesesRowChangeEvent" msprop:Generator_RowClassName="Proc_TableroInformativo_Engodes_6_mesesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="mes" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnmes" msprop:Generator_ColumnPropNameInRow="mes" msprop:Generator_ColumnPropNameInTable="mesColumn" msprop:Generator_UserColumnName="mes" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="46" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="año_orden" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnaño_orden" msprop:Generator_ColumnPropNameInRow="año_orden" msprop:Generator_ColumnPropNameInTable="año_ordenColumn" msprop:Generator_UserColumnName="año_orden" type="xs:int" minOccurs="0" />
+              <xs:element name="mes_orden" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnmes_orden" msprop:Generator_ColumnPropNameInRow="mes_orden" msprop:Generator_ColumnPropNameInTable="mes_ordenColumn" msprop:Generator_UserColumnName="mes_orden" type="xs:int" minOccurs="0" />
+              <xs:element name="nacidosvivos" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnnacidosvivos" msprop:Generator_ColumnPropNameInRow="nacidosvivos" msprop:Generator_ColumnPropNameInTable="nacidosvivosColumn" msprop:Generator_UserColumnName="nacidosvivos" type="xs:int" minOccurs="0" />
+              <xs:element name="nacidosmuertos" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnnacidosmuertos" msprop:Generator_ColumnPropNameInRow="nacidosmuertos" msprop:Generator_ColumnPropNameInTable="nacidosmuertosColumn" msprop:Generator_UserColumnName="nacidosmuertos" type="xs:int" minOccurs="0" />
+              <xs:element name="monias" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnmonias" msprop:Generator_ColumnPropNameInRow="monias" msprop:Generator_ColumnPropNameInTable="moniasColumn" msprop:Generator_UserColumnName="monias" type="xs:int" minOccurs="0" />
+              <xs:element name="muertosgestacion" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnmuertosgestacion" msprop:Generator_ColumnPropNameInRow="muertosgestacion" msprop:Generator_ColumnPropNameInTable="muertosgestacionColumn" msprop:Generator_UserColumnName="muertosgestacion" type="xs:int" minOccurs="0" />
+              <xs:element name="donados" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columndonados" msprop:Generator_ColumnPropNameInRow="donados" msprop:Generator_ColumnPropNameInTable="donadosColumn" msprop:Generator_UserColumnName="donados" type="xs:int" minOccurs="0" />
+              <xs:element name="adoptados" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnadoptados" msprop:Generator_ColumnPropNameInRow="adoptados" msprop:Generator_ColumnPropNameInTable="adoptadosColumn" msprop:Generator_UserColumnName="adoptados" type="xs:int" minOccurs="0" />
+              <xs:element name="destetados" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columndestetados" msprop:Generator_ColumnPropNameInRow="destetados" msprop:Generator_ColumnPropNameInTable="destetadosColumn" msprop:Generator_UserColumnName="destetados" type="xs:int" minOccurs="0" />
+              <xs:element name="momias" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnmomias" msprop:Generator_ColumnPropNameInRow="momias" msprop:Generator_ColumnPropNameInTable="momiasColumn" msprop:Generator_UserColumnName="momias" type="xs:int" minOccurs="0" />
+              <xs:element name="nacidovivos" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnnacidovivos" msprop:Generator_ColumnPropNameInRow="nacidovivos" msprop:Generator_ColumnPropNameInTable="nacidovivosColumn" msprop:Generator_UserColumnName="nacidovivos" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Proc_TableroInformativo_Engodes_3_años" msprop:Generator_TableClassName="Proc_TableroInformativo_Engodes_3_añosDataTable" msprop:Generator_TableVarName="tableProc_TableroInformativo_Engodes_3_años" msprop:Generator_TablePropName="Proc_TableroInformativo_Engodes_3_años" msprop:Generator_RowDeletingName="Proc_TableroInformativo_Engodes_3_añosRowDeleting" msprop:Generator_RowChangingName="Proc_TableroInformativo_Engodes_3_añosRowChanging" msprop:Generator_RowEvHandlerName="Proc_TableroInformativo_Engodes_3_añosRowChangeEventHandler" msprop:Generator_RowDeletedName="Proc_TableroInformativo_Engodes_3_añosRowDeleted" msprop:Generator_UserTableName="Proc_TableroInformativo_Engodes_3_años" msprop:Generator_RowChangedName="Proc_TableroInformativo_Engodes_3_añosRowChanged" msprop:Generator_RowEvArgName="Proc_TableroInformativo_Engodes_3_añosRowChangeEvent" msprop:Generator_RowClassName="Proc_TableroInformativo_Engodes_3_añosRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="año" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnaño" msprop:Generator_ColumnPropNameInRow="año" msprop:Generator_ColumnPropNameInTable="añoColumn" msprop:Generator_UserColumnName="año" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="año_orden" msprop:Generator_ColumnVarNameInTable="columnaño_orden" msprop:Generator_ColumnPropNameInRow="año_orden" msprop:Generator_ColumnPropNameInTable="año_ordenColumn" msprop:Generator_UserColumnName="año_orden" type="xs:int" minOccurs="0" />
+              <xs:element name="nacidosvivos" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnnacidosvivos" msprop:Generator_ColumnPropNameInRow="nacidosvivos" msprop:Generator_ColumnPropNameInTable="nacidosvivosColumn" msprop:Generator_UserColumnName="nacidosvivos" type="xs:int" minOccurs="0" />
+              <xs:element name="nacidosmuertos" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnnacidosmuertos" msprop:Generator_ColumnPropNameInRow="nacidosmuertos" msprop:Generator_ColumnPropNameInTable="nacidosmuertosColumn" msprop:Generator_UserColumnName="nacidosmuertos" type="xs:int" minOccurs="0" />
+              <xs:element name="momias" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnmomias" msprop:Generator_ColumnPropNameInRow="momias" msprop:Generator_ColumnPropNameInTable="momiasColumn" msprop:Generator_UserColumnName="momias" type="xs:int" minOccurs="0" />
+              <xs:element name="muertosgestacion" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnmuertosgestacion" msprop:Generator_ColumnPropNameInRow="muertosgestacion" msprop:Generator_ColumnPropNameInTable="muertosgestacionColumn" msprop:Generator_UserColumnName="muertosgestacion" type="xs:int" minOccurs="0" />
+              <xs:element name="donados" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columndonados" msprop:Generator_ColumnPropNameInRow="donados" msprop:Generator_ColumnPropNameInTable="donadosColumn" msprop:Generator_UserColumnName="donados" type="xs:int" minOccurs="0" />
+              <xs:element name="adoptados" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnadoptados" msprop:Generator_ColumnPropNameInRow="adoptados" msprop:Generator_ColumnPropNameInTable="adoptadosColumn" msprop:Generator_UserColumnName="adoptados" type="xs:int" minOccurs="0" />
+              <xs:element name="destetados" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columndestetados" msprop:Generator_ColumnPropNameInRow="destetados" msprop:Generator_ColumnPropNameInTable="destetadosColumn" msprop:Generator_UserColumnName="destetados" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
