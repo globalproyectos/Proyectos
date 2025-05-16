@@ -51,7 +51,7 @@ Partial Class Bienvenida
         Me.LabelX2.Size = New System.Drawing.Size(398, 52)
         Me.LabelX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2010
         Me.LabelX2.TabIndex = 25
-        Me.LabelX2.Text = ".::Sistema de Granja Porcinos::."
+        Me.LabelX2.Text = ".::*Sistema de Granja Porcinos::."
         '
         'lbFecha
         '
